@@ -9,14 +9,14 @@ extents = Vector3( 1, 0.064269, 1 )
 
 [node name="Level 1" type="Spatial"]
 
-[node name="KinematicBody" type="KinematicBody" parent="."]
-transform = Transform( 5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0 )
+[node name="Floor" type="KinematicBody" parent="."]
+transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0 )
 
-[node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
+[node name="CollisionShape" type="CollisionShape" parent="Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0625725, 0 )
 shape = SubResource( 1 )
 
-[node name="MeshInstance" type="MeshInstance" parent="KinematicBody"]
+[node name="MeshInstance" type="MeshInstance" parent="Floor"]
 mesh = SubResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
