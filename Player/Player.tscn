@@ -1,19 +1,27 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [sub_resource type="CapsuleShape" id=1]
 
+[sub_resource type="SphereShape" id=3]
+
 [sub_resource type="CapsuleMesh" id=2]
 
-[node name="Player" type="RigidBody"]
+[node name="Player" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.483, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.942356, 0.334613, 0, -0.334613, 0.942356, 0, 2.48351, 4.392 )
+[node name="SpringArm" type="SpringArm" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0 )
+shape = SubResource( 3 )
+spring_length = 7.0
+margin = 0.2
+
+[node name="Camera" type="Camera" parent="SpringArm"]
 fov = 76.9315
+near = 0.2
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
