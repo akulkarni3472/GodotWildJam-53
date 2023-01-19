@@ -9,7 +9,7 @@
 [node name="Level 1" type="Spatial"]
 
 [node name="Floor" type="KinematicBody" parent="."]
-transform = Transform( 5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0 )
+transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Floor"]
 mesh = SubResource( 2 )
@@ -20,3 +20,14 @@ shape = SubResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65145, 0 )
+speed = 9.0
+jump_force = 30.0
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.682534, 0.730854, 0, -0.730854, 0.682534, 0, 56.6163, 40.4905 )
+light_energy = 1.079
+light_indirect_energy = 0.0
+shadow_enabled = true
+shadow_bias = 10.0
+spot_range = 139.631
+spot_angle = 52.0313

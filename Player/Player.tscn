@@ -5,9 +5,9 @@
 
 [sub_resource type="CapsuleMesh" id=4]
 
-[sub_resource type="CapsuleShape" id=5]
+[sub_resource type="CapsuleMesh" id=7]
 
-[sub_resource type="SphereShape" id=6]
+[sub_resource type="CapsuleShape" id=5]
 
 [node name="Player" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.483, 0 )
@@ -18,14 +18,25 @@ jump_force = 50.0
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 mesh = SubResource( 4 )
 
+[node name="SpotLight" type="SpotLight" parent="MeshInstance"]
+transform = Transform( -1, 8.74228e-08, 4.37114e-08, -4.37114e-08, 1.91069e-15, -1, -8.74228e-08, -1, 1.91069e-15, 0, -9.10332e-09, -0.20826 )
+spot_range = 73.2321
+spot_angle = 23.2626
+
+[node name="MeshInstance2" type="MeshInstance" parent="MeshInstance"]
+transform = Transform( 0.2, 0, 0, 0, -0.0370098, -0.491365, 0, 0.196546, -0.0925246, 0, 0.648973, -0.447421 )
+mesh = SubResource( 7 )
+skeleton = NodePath("../..")
+
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 5 )
 
 [node name="SpringArm" type="SpringArm" parent="."]
-shape = SubResource( 6 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 spring_length = 7.0
 margin = 0.2
 script = ExtResource( 2 )
+mouse_sensitivity = 0.3
 
 [node name="Camera" type="Camera" parent="SpringArm"]

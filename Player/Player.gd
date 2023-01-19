@@ -1,6 +1,7 @@
 extends KinematicBody
 
 export var speed = 8.0
+export var lerp_val = 0.2
 export var jump_force = 20.0
 export var gravity = 50
 
@@ -11,7 +12,8 @@ onready var spring_arm= $SpringArm
 onready var model = $MeshInstance
 
 func _ready():
-	spring_arm.add_excluded_object(get_rid())
+	#spring_arm.add_excluded_object(get_rid())
+	pass
 
 func _physics_process(delta):
 	apply_gravity(delta)
@@ -29,13 +31,11 @@ func move():
 	move_dir = move_dir.rotated(Vector3.UP, spring_arm.rotation.y).normalized()
 	velocity.x = move_dir.x * speed
 	velocity.z = move_dir.z * speed
+	if move_dir.z != 0 or move_dir.x != 0:
+		model.rotation.y = lerp_angle(model.rotation.y, atan2(velocity.x, velocity.z), lerp_val)
 
 func apply_gravity(delta):
 	velocity.y -= delta * gravity
-
-func face_direction():
-	if velocity.length() > 0.2:
-		var look_direction = Vector2(velocity.z, velocity.x)
 
 func jump():
 	var landed = is_on_floor() and snap_vector == Vector3.ZERO
