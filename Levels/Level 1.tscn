@@ -1,33 +1,49 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Items/Block.tscn" type="PackedScene" id=2]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.14902, 0.32549, 0.168627, 1 )
 
 [sub_resource type="PlaneMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=4]
 
 [sub_resource type="BoxShape" id=3]
 
 [node name="Level 1" type="Spatial"]
 
-[node name="Floor" type="KinematicBody" parent="."]
-transform = Transform( 50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0 )
+[node name="OmniLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.983195, 1.61158e-07, -0.182561, 0.0522441, 0.958178, 0.281364, 0.174926, -0.286174, 0.942075, 49.7896, 88.2933, -101.741 )
+light_energy = 5.0
+light_indirect_energy = 0.0
+shadow_enabled = true
+shadow_contact = 3.6
+shadow_reverse_cull_face = true
+
+[node name="Floor" type="RigidBody" parent="."]
+transform = Transform( 200, 0, 0, 0, 1, 0, 0, 0, 200, 0, 0, 0 )
+mode = 1
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
 
 [node name="MeshInstance" type="MeshInstance" parent="Floor"]
+material_override = SubResource( 5 )
 mesh = SubResource( 2 )
+material/0 = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 shape = SubResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65145, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65145, 2.19558 )
 speed = 9.0
-jump_force = 30.0
+jump_force = 20.0
+gravity = 50
 
-[node name="SpotLight" type="SpotLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.682534, 0.730854, 0, -0.730854, 0.682534, 0, 56.6163, 40.4905 )
-light_energy = 1.079
-light_indirect_energy = 0.0
-shadow_enabled = true
-shadow_bias = 10.0
-spot_range = 139.631
-spot_angle = 52.0313
+[node name="Block" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.493419, 1, 6.222 )

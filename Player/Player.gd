@@ -10,6 +10,10 @@ var snap_vector = Vector3.DOWN
 
 onready var spring_arm= $SpringArm
 onready var model = $MeshInstance
+onready var grab_cast = $MeshInstance/GrabPos
+onready var hold_pos = $MeshInstance/GrabPos/HoldPos
+
+var held_object: Object
 
 func _ready():
 	#spring_arm.add_excluded_object(get_rid())
@@ -17,6 +21,7 @@ func _ready():
 
 func _physics_process(delta):
 	apply_gravity(delta)
+	grab()
 	move()
 	jump()
 	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
@@ -46,3 +51,16 @@ func jump():
 		velocity.y = jump_force
 	elif landed:
 		snap_vector = Vector3.DOWN
+
+func grab():
+	if Input.is_action_just_pressed("left_click"):
+		if held_object:
+			held_object.mode = RigidBody.MODE_RIGID
+			held_object.collision_mask = 1
+			held_object = null
+		elif grab_cast.get_collider():
+			held_object = grab_cast.get_collider()
+			held_object.mode = RigidBody.MODE_KINEMATIC
+			held_object.collision_mask = 0
+	if held_object:
+		held_object.global_transform.origin = held_object.global_transform.origin.linear_interpolate(hold_pos.global_transform.origin, lerp_val)
