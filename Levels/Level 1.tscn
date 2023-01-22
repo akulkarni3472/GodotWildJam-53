@@ -1,16 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Items/Block.tscn" type="PackedScene" id=2]
-
-[sub_resource type="SpatialMaterial" id=5]
-albedo_color = Color( 0.14902, 0.32549, 0.168627, 1 )
-
-[sub_resource type="PlaneMesh" id=2]
-
-[sub_resource type="SpatialMaterial" id=4]
-
-[sub_resource type="BoxShape" id=3]
+[ext_resource path="res://Items/Floor.tscn" type="PackedScene" id=3]
 
 [node name="Level 1" type="Spatial"]
 
@@ -22,28 +14,12 @@ shadow_enabled = true
 shadow_contact = 3.6
 shadow_reverse_cull_face = true
 
-[node name="Floor" type="RigidBody" parent="."]
-transform = Transform( 200, 0, 0, 0, 1, 0, 0, 0, 200, 0, 0, 0 )
-mode = 1
-axis_lock_linear_y = true
-axis_lock_angular_x = true
-axis_lock_angular_y = true
-axis_lock_angular_z = true
-
-[node name="MeshInstance" type="MeshInstance" parent="Floor"]
-material_override = SubResource( 5 )
-mesh = SubResource( 2 )
-material/0 = SubResource( 4 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Floor"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
-shape = SubResource( 3 )
+[node name="Floor" parent="." instance=ExtResource( 3 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65145, 2.19558 )
-speed = 9.0
-jump_force = 20.0
-gravity = 50
+jump_force = 8.0
+gravity = 9.8
 
 [node name="Block" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.493419, 1, 6.222 )

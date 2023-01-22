@@ -46,7 +46,7 @@ shape = SubResource( 5 )
 
 [node name="SpringArm" type="SpringArm" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
-spring_length = 7.0
+spring_length = 10.0
 margin = 0.2
 script = ExtResource( 2 )
 mouse_sensitivity = 0.3

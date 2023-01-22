@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=2]
+
+[sub_resource type="PhysicsMaterial" id=6]
+rough = true
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.14902, 0.32549, 0.168627, 1 )
+
+[sub_resource type="PlaneMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=4]
+
+[sub_resource type="BoxShape" id=3]
+
+[node name="Floor" type="RigidBody"]
+transform = Transform( 200, 0, 0, 0, 1, 0, 0, 0, 200, 0, 0, 0 )
+mode = 1
+physics_material_override = SubResource( 6 )
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+material_override = SubResource( 5 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 3 )

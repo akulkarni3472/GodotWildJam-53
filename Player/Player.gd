@@ -1,9 +1,10 @@
 extends KinematicBody
 
-export var speed = 8.0
+export var speed = 10.0
 export var lerp_val = 0.2
-export var jump_force = 20.0
-export var gravity = 50
+export var jump_force = 8.0
+export var gravity = 9.8
+export var grab_rotate_speed = 0.1
 
 var velocity = Vector3.ZERO
 var snap_vector = Vector3.DOWN
@@ -64,3 +65,7 @@ func grab():
 			held_object.collision_mask = 0
 	if held_object:
 		held_object.global_transform.origin = held_object.global_transform.origin.linear_interpolate(hold_pos.global_transform.origin, lerp_val)
+		if Input.is_action_pressed("rotate_left"):
+			held_object.rotation.y += grab_rotate_speed
+		elif Input.is_action_pressed("rotate_right"):
+			held_object.rotation.y -= grab_rotate_speed
